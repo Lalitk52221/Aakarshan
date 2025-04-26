@@ -38,7 +38,8 @@ const SignUp = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setPending(true);
-    const res = await fetch("/api/signup", {
+    const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || "";
+  const res = await fetch(`${API_BASE_URL}/api/auth/signup`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

@@ -4,6 +4,7 @@ import connectToDatabase from "@/lib/mongodb";
 import bcrypt from "bcryptjs";
 import CredentialsProvider from "next-auth/providers/credentials";
 import Github from "next-auth/providers/github";
+
 const handler = NextAuth({
   session: {
     strategy: "jwt",
