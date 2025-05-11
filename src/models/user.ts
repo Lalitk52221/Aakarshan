@@ -1,5 +1,6 @@
 import mongoose,{Document, Model, Schema} from "mongoose";
 
+
 interface IUser extends Document{
     name: string;
     email: string;
@@ -25,7 +26,8 @@ const UserSchema:Schema<IUser> = new mongoose.Schema({
     role:{
         type: String,
         enum: ["Student", "Teacher", "Admin"],
-        default: "Student",    }
+        default: "Student",  
+    required: true, }
 
 })
 

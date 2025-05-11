@@ -1,4 +1,22 @@
 import NextAuth from "next-auth";
+
+declare module "next-auth" {
+  interface Session {
+    user: {
+      name?: string | null;
+      email?: string | null;
+      image?: string | null;
+      role?: string | null;
+    };
+  }
+}
+
+interface IUser {
+  id: string;
+  email: string;
+  name: string;
+  role: string;
+}
 import User from "@/models/user";
 import connectToDatabase from "@/lib/mongodb";
 import bcrypt from "bcryptjs";
@@ -66,6 +84,7 @@ const handler = NextAuth({
             name: profile?.name,
             email: profile?.email,
             role: "Student",
+            
           });
         }
       }
@@ -77,9 +96,10 @@ const handler = NextAuth({
         token.id = user.id;
         token.email = user.email;
         token.name = user.name;
-        // token.role = user.role;
+        token.role = (user as IUser).role;
       }
       return token;
+  
     },
     async session({ session, token }) {
       if (token) {
@@ -87,7 +107,7 @@ const handler = NextAuth({
           email: token.email,
           name: token.name,
           image: token.picture,
-          // role: token.role,
+          role: token.role as string | null | undefined,
         };
       }
       return session;

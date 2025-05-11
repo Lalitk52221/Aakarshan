@@ -19,8 +19,15 @@ const HomePage = () => {
     <div className="container mx-auto p-6">
       <SessionProvider>
         {/* Navbar */}
-        <nav className="flex justify-center gap-5 md:justify-between items-center py-4 bg-white text-black px-6 rounded-lg shadow-md">
-          <h1 className="text-2xl font-bold">Aakarshan</h1>
+        <nav className="flex justify-center gap-4 md:justify-between items-center py-4 bg-white text-black px-6 rounded-lg shadow-md ">
+          {/* <h1 className="text-2xl font-bold">Aakarshan</h1> */}
+          <Image
+            src="/ALogo.png"
+            alt="Logo"
+            width={500}
+            height={300}
+            className="w-40 h-auto"/>
+  
           <div className="md:hidden">
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
@@ -43,7 +50,7 @@ const HomePage = () => {
             </button>
           </div>
           <ul
-            className={`flex-col font-semibold md:flex-row md:flex space-y-2 md:space-y-0 md:space-x-6 absolute md:border-0 md:static md:bg-transparent w-32 md:w-auto right-5 top-24 md:top-auto md:opacity-0 transition-all text-xl ${
+            className={`flex-col font-semibold md:flex-row md:flex space-y-2 md:space-y-0 md:space-x-1 lg:space-x-4  absolute md:border-0 md:static md:bg-transparent w-32 md:w-auto right-5 top-24 md:top-auto md:opacity-0 transition-all lg:text-lg text-base ${
               isMenuOpen ? "opacity-100 transition-all bg-white/50 rounded-lg p-2 backdrop-blur border z-10 " : "opacity-0"
             } md:opacity-100 transition-all`}
           >
@@ -51,7 +58,7 @@ const HomePage = () => {
               <a
                 href="#courses"
                 onClick={(e) => handleSmoothScroll(e, "courses")}
-                className={`hover:bg-blue-500 ${isMenuOpen && "border-b-2 text-base"} hover:text-white px-4 py-2 rounded transition-all block md:inline`}
+                className={`hover:bg-blue-500 ${isMenuOpen && "border-b-2 py-1 text-base"} hover:text-white px-4 py-2 rounded transition-all block md:inline`}
               >
                 Courses
               </a>
@@ -60,7 +67,7 @@ const HomePage = () => {
               <a
                 href="#about"
                 onClick={(e) => handleSmoothScroll(e, "about")}
-                className={`hover:bg-blue-500 ${isMenuOpen && "border-b-2 text-base"} hover:text-white px-4 py-2 rounded transition-all block md:inline`}
+                className={`hover:bg-blue-500 ${isMenuOpen && "border-b-2 text-base py-1"} hover:text-white px-4 py-2 whitespace-nowrap rounded transition-all block md:inline`}
               >
                 About Us
               </a>
@@ -69,7 +76,7 @@ const HomePage = () => {
               <a
                 href="#contact"
                 onClick={(e) => handleSmoothScroll(e, "contact")}
-                className={`hover:bg-blue-500 ${isMenuOpen && "text-base"} hover:text-white px-4 py-2 rounded transition-all block md:inline`}
+                className={`hover:bg-blue-500 ${isMenuOpen && "text-base border-b-2 py-1"} hover:text-white px-4 py-2 rounded transition-all block md:inline`}
               >
                 Contact
               </a>
@@ -77,8 +84,8 @@ const HomePage = () => {
             <li>
               <a
                 href="/admin"
-                className={`hover:bg-blue-500 ${isMenuOpen && "text-base"} hover:text-white px-4 py-2 rounded transition-all block md:inline`}
-              >
+                className={`hover:bg-blue-500 bg-black text-white ${isMenuOpen && "text-base py-1"} hover:text-white px-4 py-2 rounded transition-all block md:inline`}
+              > 
                 Admin
               </a>
             </li>
@@ -111,6 +118,7 @@ const HomePage = () => {
                 alt="Computer Training"
                 width={500}
                 height={300}
+                loading="lazy"
                 className="w-full h-40 object-cover rounded-md"
               />
               <h3 className="text-xl font-bold text-gray-800 mt-4">
@@ -127,6 +135,7 @@ const HomePage = () => {
                 alt="Tally"
                 width={500}
                 height={300}
+                loading="lazy"
                 className="w-full h-40 object-cover rounded-md"
               />
               <h3 className="text-xl font-bold text-gray-800 mt-4">Tally</h3>
@@ -141,6 +150,7 @@ const HomePage = () => {
                 alt="Spoken English"
                 width={500}
                 height={300}
+                loading="lazy"
                 className="w-full h-40 object-cover rounded-md"
               />
               <h3 className="text-xl font-bold text-gray-800 mt-4">
@@ -158,6 +168,7 @@ const HomePage = () => {
                 alt="Beauty & Wellness"
                 width={500}
                 height={300}
+                loading="lazy"
                 className="w-full h-40 object-cover rounded-md"
               />
               <h3 className="text-xl font-bold text-gray-800 mt-4">

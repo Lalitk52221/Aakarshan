@@ -1,3 +1,5 @@
+"use client";
+import React from "react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
   DropdownMenu,
@@ -18,7 +20,7 @@ const UserButton = () => {
   if (status === "loading") {
     return <Loader className="size-6 mr-4 mt-4 float-right animate-spin" />;
   }
-
+  console.log("session", session);
   const avatarFallback = session?.user?.name?.charAt(0).toUpperCase();
   const handleSignOut = async () => {
     await signOut({
@@ -33,7 +35,12 @@ const UserButton = () => {
         <DropdownMenu modal={false}>
           <DropdownMenuTrigger className="outline-none relative float-right ">
             <div className="flex gap-4 items-center">
-             <span className="hidden md:block">{session.user?.name}</span>
+              <div className="text-right leading-0.5 hidden md:flex flex-col">
+                <span className="capitalize text-base">
+                  {session.user?.name}
+                </span>
+                <p className="text-xs text-gray-500">{session.user?.role}</p>
+              </div>
               <Avatar className="size-10 hover:opacity-75 transition ">
                 <AvatarImage
                   className="size-10 hover:opaticy-75 transition "
@@ -45,7 +52,11 @@ const UserButton = () => {
               </Avatar>
             </div>
           </DropdownMenuTrigger>
-          <DropdownMenuContent align="center" side="bottom" className="w-50 mt-4">
+          <DropdownMenuContent
+            align="center"
+            side="bottom"
+            className="w-50 mt-4"
+          >
             <DropdownMenuItem className="h-10" onClick={() => handleSignOut()}>
               Log out
             </DropdownMenuItem>
@@ -56,7 +67,6 @@ const UserButton = () => {
           <Button>
             <Link href="sign-in ">Sign-In</Link>
           </Button>
-          
         </div>
       )}{" "}
     </div>
