@@ -17,25 +17,34 @@ const handler = NextAuth({
     CredentialsProvider({
       name: "Credentials",
       credentials: {
-        email: {},
-        password: {},
-        role:{},
+        email: {
+          label: "Email",
+          type: "text",
+          placeholder: "example@example.com",
+        },
+        password: { label: "Password", type: "password" },
+        role: { label: "Role", type: "text", placeholder: "Student/Teacher" },
       },
       async authorize(credentials) {
         try {
+          if (
+            !credentials?.email ||
+            !credentials?.password ||
+            !credentials?.role
+          ) {
+            throw new Error("All fields are required.");
+          }
           await connectToDatabase();
-          const user = await User.findOne({ email: credentials?.email });
+          const user = await User.findOne({ email: credentials.email });
           if (!user) {
-            throw new Error("");
+            throw new Error("No user found with the email.");
           }
-          const isValidPassword = await bcrypt.compare(
-            credentials?.password ?? "",
-            user.password as string
-          );
+          const isValidPassword = await bcrypt.compare(credentials.password, user.password as string);
           if (!isValidPassword) {
-            throw new Error("");
+            throw new Error("Invalid password.");
           }
-          if (user.role !== credentials?.role) {
+
+          if (user.role !== credentials.role) {
             throw new Error("Role not matched");
           }
 
@@ -56,7 +65,7 @@ const handler = NextAuth({
           await User.create({
             name: profile?.name,
             email: profile?.email,
-            role:"Student"
+            role: "Student",
           });
         }
       }
@@ -68,7 +77,7 @@ const handler = NextAuth({
         token.id = user.id;
         token.email = user.email;
         token.name = user.name;
-        token.role = user.role;
+        // token.role = user.role;
       }
       return token;
     },
@@ -78,7 +87,7 @@ const handler = NextAuth({
           email: token.email,
           name: token.name,
           image: token.picture,
-          role: token.role,
+          // role: token.role,
         };
       }
       return session;
