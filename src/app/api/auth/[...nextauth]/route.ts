@@ -19,6 +19,7 @@ const handler = NextAuth({
       credentials: {
         email: {},
         password: {},
+        role:{},
       },
       async authorize(credentials) {
         try {
@@ -34,6 +35,10 @@ const handler = NextAuth({
           if (!isValidPassword) {
             throw new Error("");
           }
+          if (user.role !== credentials?.role) {
+            throw new Error("Role not matched");
+          }
+
           return user;
         } catch {
           return null;
@@ -51,6 +56,7 @@ const handler = NextAuth({
           await User.create({
             name: profile?.name,
             email: profile?.email,
+            role:"Student"
           });
         }
       }
@@ -61,6 +67,8 @@ const handler = NextAuth({
       if (user) {
         token.id = user.id;
         token.email = user.email;
+        token.name = user.name;
+        token.role = user.role;
       }
       return token;
     },
@@ -70,6 +78,7 @@ const handler = NextAuth({
           email: token.email,
           name: token.name,
           image: token.picture,
+          role: token.role,
         };
       }
       return session;

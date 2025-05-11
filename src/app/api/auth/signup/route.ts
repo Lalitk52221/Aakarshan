@@ -4,13 +4,13 @@ import User from "@/models/user";
 import connectTODatabase from "@/lib/mongodb";
 
 export async function POST(request: Request) {
-  const { name, email, password, confirmPassword } = await request.json();
+  const { name, email, password, confirmPassword, role } = await request.json();
 
   const isvalidEmail = (email: string) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailRegex.test(email);
   };
-  if (!name || !email || !password || !confirmPassword) {
+  if (!name || !email || !password || !confirmPassword || !role) {
     return NextResponse.json(
       { message: "Please fill all the fields" },
       { status: 400 }
@@ -50,10 +50,12 @@ export async function POST(request: Request) {
     console.log("Hashing password...");
     const hashedPassword = await bcrypt.hash(password, 10);
     console.log("Creating user...");
+
     const newUser = new User({
       name,
       email,
       password: hashedPassword,
+      role,
     });
     await newUser.save();
     console.log("User created successfully");

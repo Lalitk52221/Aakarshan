@@ -30,6 +30,7 @@ const SignUp = () => {
     email: "",
     password: "",
     confirmPassword: "",
+    role: "Student",
   });
   const [pending, setPending] = useState(false);
   const [error, setError] = useState(null);
@@ -39,7 +40,7 @@ const SignUp = () => {
     e.preventDefault();
     setPending(true);
     const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || "";
-  const res = await fetch(`${API_BASE_URL}/api/auth/signup`, {
+    const res = await fetch(`${API_BASE_URL}/api/auth/signup`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -60,7 +61,7 @@ const SignUp = () => {
       setError(data.message);
     }
   };
- const handleProvider = (
+  const handleProvider = (
     event: React.MouseEvent<HTMLButtonElement>,
     value: "github" | "google"
   ) => {
@@ -85,6 +86,19 @@ const SignUp = () => {
         )}
         <CardContent className="px-2 sm:px-6 ">
           <form onSubmit={handleSubmit} className="space-y-3">
+            {/* <label htmlFor="role" className="block text-sm font-medium text-gray-700"> Select Your Role</label> */}
+            <select
+              id="role"
+              disabled={pending}
+              value={form.role}
+              onChange={(e) => setForm({ ...form, role: e.target.value })}
+              required
+              className="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+            >
+              <option value="Student">Student</option>
+              <option value = 'Teacher'>Teacher</option>
+              <option value="Admin">Admin</option>
+            </select>
             <Input
               type="text"
               disabled={pending}

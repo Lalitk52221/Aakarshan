@@ -27,6 +27,7 @@ import { TriangleAlert } from "lucide-react";
 const SignIn = () => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
+  const [role, setRole] = useState<string>("Student");
   const [pending, setPending] = useState(false);
   const router = useRouter();
   const [error, setError] = useState("");
@@ -38,6 +39,7 @@ const SignIn = () => {
       redirect: false,
       email,
       password,
+      role,
     });
     if (res?.ok) {
       router.push("/");
@@ -73,6 +75,18 @@ const SignIn = () => {
         )}
         <CardContent className="px-2 sm:px-6 ">
           <form onSubmit={handleSubmit} className="space-y-3">
+            <select
+              id="role"
+              disabled={pending}
+              value={role}
+              onChange={(e) => setRole(e.target.value)}
+              required
+              className="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+            >
+              <option value="Student">Student</option>
+              <option value="Teacher">Teacher</option>
+              <option value="Admin">Admin</option>
+            </select>
             <Input
               type="email"
               disabled={pending}

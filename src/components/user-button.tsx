@@ -31,9 +31,9 @@ const UserButton = () => {
     <div>
       {session ? (
         <DropdownMenu modal={false}>
-          <DropdownMenuTrigger className="outline-none relative float-right p-4 md:p-8">
+          <DropdownMenuTrigger className="outline-none relative float-right ">
             <div className="flex gap-4 items-center">
-              <span>{session.user?.name}</span>
+             <span className="hidden md:block">{session.user?.name}</span>
               <Avatar className="size-10 hover:opacity-75 transition ">
                 <AvatarImage
                   className="size-10 hover:opaticy-75 transition "
@@ -45,20 +45,18 @@ const UserButton = () => {
               </Avatar>
             </div>
           </DropdownMenuTrigger>
-          <DropdownMenuContent align="center" side="bottom" className="w-50">
+          <DropdownMenuContent align="center" side="bottom" className="w-50 mt-4">
             <DropdownMenuItem className="h-10" onClick={() => handleSignOut()}>
               Log out
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
       ) : (
-        <div className="flex justify-end p-4 gap-4 ">
+        <div className="p4">
           <Button>
             <Link href="sign-in ">Sign-In</Link>
           </Button>
-          <Button>
-            <Link href="sign-up ">Sign-Up</Link>
-          </Button>
+          
         </div>
       )}{" "}
     </div>

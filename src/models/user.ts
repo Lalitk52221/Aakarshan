@@ -5,6 +5,7 @@ interface IUser extends Document{
     email: string;
     password: string;
     id: string; 
+    role: string;
 }
 
 const UserSchema:Schema<IUser> = new mongoose.Schema({
@@ -21,6 +22,10 @@ const UserSchema:Schema<IUser> = new mongoose.Schema({
         type: String,
         required: false,
     },
+    role:{
+        type: String,
+        enum: ["Student", "Teacher", "Admin"],
+        default: "Student",    }
 
 })
 
