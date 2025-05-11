@@ -74,6 +74,14 @@ const HomePage = () => {
                 Contact
               </a>
             </li>
+            <li>
+              <a
+                href="/admin"
+                className={`hover:bg-blue-500 ${isMenuOpen && "text-base"} hover:text-white px-4 py-2 rounded transition-all block md:inline`}
+              >
+                Admin
+              </a>
+            </li>
           </ul>
           <div className="">
             <UserButton />
