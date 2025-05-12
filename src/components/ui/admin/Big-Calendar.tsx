@@ -4,7 +4,7 @@ import { Calendar, momentLocalizer, View, Views } from "react-big-calendar";
 import moment from "moment";
 import { calendarEvents } from "@/lib/data";
 import { useState } from "react";
-import { View } from "lucide-react";
+// import { View } from "lucide-react";
 
 const localizer = momentLocalizer(moment);
 
