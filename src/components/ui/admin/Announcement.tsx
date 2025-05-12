@@ -13,7 +13,7 @@ const Announcement = () => {
                 <h2 className="font-medium">Lorem ipsum dolor sit!</h2>
                 <span className="text-xs text-gray-400 bg-white rounded-md p-1">2025-01-01</span>
             </div>
-                <p className="text-sm text-gray-400">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Culpa, dolorem. </p>
+                <p className="text-sm  text-gray-400">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Culpa, dolorem. </p>
         </div>
         <div className="bg-lamaPurpleLight rounded-md p-4">
             <div className="flex items-center justify-between">
