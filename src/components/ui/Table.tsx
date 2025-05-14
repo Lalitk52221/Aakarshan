@@ -16,7 +16,6 @@ const Table = ({
                 <th key={col.accessor} className={col.className}>{col.header}</th>
             ))}
         </tr>
-        
     </thead>
     <tbody>{data.map((item)=>renderRow(item))}</tbody>
     </table>;
