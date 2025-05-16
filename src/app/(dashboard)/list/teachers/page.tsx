@@ -58,7 +58,7 @@ const TeacherList = () => {
     <tr key={item.id} className="border-b border-gray-200 even:bg-slate-50 text-sm hover:bg-lamaPurpleLight">
       <td className="flex items-center gap-2 p-4">
         <Image
-          src={item.photo}
+          src={item.photo || "/avatar.png"}
           alt=""
           width={40}
           height={40}
