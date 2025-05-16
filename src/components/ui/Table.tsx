@@ -1,6 +1,12 @@
 import React from "react";
+type Column<T> = {
+  header: string;
+  accessor: keyof T | string;
+  className?: string;
+};
+
 type TableProps<T> = {
-  columns: { header: string; accessor: string; className?: string }[];
+  columns: Column<T>[];
   renderRow: (item: T) => React.ReactNode;
   data: T[];
 }
