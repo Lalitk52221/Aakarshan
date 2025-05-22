@@ -113,7 +113,7 @@ const StudentList = () => {
         </div>
       </div>
       {/* LIST  */}
-      <Table columns={columns} renderRow = {renderRow} data={studentsData} />
+      <Table columns={columns} renderRow={renderRow} data={studentsData.map(student => ({ ...student, grade: String(student.grade) }))} />
       <div className=""></div>
       {/* PAGINATION  */}
       <Pagination />
