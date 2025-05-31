@@ -4,11 +4,11 @@ import Image from "next/image";
 import React from "react";
 import Table from "@/components/ui/Table";
 import Link from "next/link";
-import { role, studentsData, } from "@/lib/data";
+import { role, studentsData } from "@/lib/data";
 
 type Student = {
   id: number;
-  studentId : string;
+  studentId: string;
   name: string;
   email?: string;
   photo?: string;
@@ -53,9 +53,12 @@ const columns = [
     accessor: "actions",
   },
 ];
-const StudentList = () => {
+const StudentListPage = () => {
   const renderRow = (item: Student) => (
-    <tr key={item.id} className="border-b border-gray-200 even:bg-slate-50 text-sm hover:bg-lamaPurpleLight">
+    <tr
+      key={item.id}
+      className="border-b border-gray-200 even:bg-slate-50 text-sm hover:bg-lamaPurpleLight"
+    >
       <td className="flex items-center gap-2 p-4">
         <Image
           src={item.photo || "/avatar.png"}
@@ -68,13 +71,13 @@ const StudentList = () => {
           <h3 className="font-semibold">{item.name}</h3>
           <p className="text-xs text-gray-500">{item?.email}</p>
         </div>
-        </td>
-        <td className="hidden md:table-cell">{item.studentId}</td>
-        <td className="hidden md:table-cell">{item.grade}</td>
-        <td className="hidden md:table-cell">{item.class}</td>
-        <td className="hidden lg:table-cell">{item.phone}</td>
-        <td className="hidden lg:table-cell">{item.address}</td>
-      
+      </td>
+      <td className="hidden md:table-cell">{item.studentId}</td>
+      <td className="hidden md:table-cell">{item.grade}</td>
+      <td className="hidden md:table-cell">{item.class}</td>
+      <td className="hidden lg:table-cell">{item.phone}</td>
+      <td className="hidden lg:table-cell">{item.address}</td>
+
       <td>
         <div className="flex items-center gap-2 ">
           <Link href={`/list/teachers/${item.id}`}>
@@ -113,7 +116,15 @@ const StudentList = () => {
         </div>
       </div>
       {/* LIST  */}
-      <Table columns={columns} renderRow={renderRow} data={studentsData.map(student => ({ ...student, grade: String(student.grade) }))} />
+      <Table
+        columns={columns}
+        renderRow={renderRow}
+        data={studentsData.map((student) => ({
+          ...student,
+          grade: String(student.grade),
+        }))}
+        // data={studentsData}
+      />
       <div className=""></div>
       {/* PAGINATION  */}
       <Pagination />
@@ -121,4 +132,4 @@ const StudentList = () => {
   );
 };
 
-export default StudentList;
+export default StudentListPage;

@@ -933,8 +933,8 @@ export const calendarEvents = [
   {
     title: "Biology",
     allDay: false,
-    start: new Date(2025, 4, 12, 10, 0),
-    end: new Date(2025, 4, 12, 10, 45),
+    start: new Date(2025, 4, 30, 10, 0),
+    end: new Date(2025, 4, 30, 10, 45),
   },
   {
     title: "Physics",
