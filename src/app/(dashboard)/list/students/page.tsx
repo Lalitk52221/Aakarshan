@@ -6,15 +6,16 @@ import Table from "@/components/ui/Table";
 import Link from "next/link";
 import { role, studentsData } from "@/lib/data";
 
+
 type Student = {
   id: number;
   studentId: string;
   name: string;
   email?: string;
   photo?: string;
-  phone: string;
-  grade: string;
-  class: string;
+  phone?: string;
+  grade: number;
+  class:string;
   address: string;
 };
 
@@ -33,11 +34,7 @@ const columns = [
     accessor: "grade",
     className: "hidden md:table-cell",
   },
-  {
-    header: "Class",
-    accessor: "class",
-    className: "hidden md:table-cell",
-  },
+ 
   {
     header: "Phone",
     accessor: "phone",
@@ -55,10 +52,7 @@ const columns = [
 ];
 const StudentListPage = () => {
   const renderRow = (item: Student) => (
-    <tr
-      key={item.id}
-      className="border-b border-gray-200 even:bg-slate-50 text-sm hover:bg-lamaPurpleLight"
-    >
+    <tr key={item.id} className="border-b border-gray-200 even:bg-slate-50 text-sm hover:bg-lamaPurpleLight">
       <td className="flex items-center gap-2 p-4">
         <Image
           src={item.photo || "/avatar.png"}
@@ -69,24 +63,23 @@ const StudentListPage = () => {
         />
         <div className="flex flex-col">
           <h3 className="font-semibold">{item.name}</h3>
-          <p className="text-xs text-gray-500">{item?.email}</p>
+          <p className="text-xs text-gray-500">{item.class}</p>
         </div>
-      </td>
-      <td className="hidden md:table-cell">{item.studentId}</td>
-      <td className="hidden md:table-cell">{item.grade}</td>
-      <td className="hidden md:table-cell">{item.class}</td>
-      <td className="hidden lg:table-cell">{item.phone}</td>
-      <td className="hidden lg:table-cell">{item.address}</td>
-
+        </td>
+        <td className="hidden md:table-cell">{item.studentId}</td>
+        <td className="hidden md:table-cell">{item.grade}</td>
+        <td className="hidden lg:table-cell">{item.phone}</td>
+        <td className="hidden lg:table-cell">{item.address}</td>
+      
       <td>
         <div className="flex items-center gap-2 ">
-          <Link href={`/list/teachers/${item.id}`}>
-            <button className="w-7 h-7 flex items-center justify-center rounded-full bg-lamaSky">
+          <Link href={`/list/students/${item.id}`}>
+            <button className="w-7 h-7 flex items-center justify-center rounded-full bg-lamaSky cursor-pointer">
               <Image src="/view.png" alt="" width={16} height={16} />
             </button>
-          </Link>
+          </Link> 
           {role === "admin" && (
-            <button className="w-7 h-7 flex items-center justify-center rounded-full bg-gray-300">
+            <button className="w-7 h-7 flex items-center justify-center rounded-full bg-gray-300 cursor-pointer">
               <Image src="/delete.png" alt="" width={16} height={16} />
             </button>
           )}
@@ -109,22 +102,16 @@ const StudentListPage = () => {
             <button className="w-8 h-8 flex items-center justify-center rounded-full bg-lamaYellow">
               <Image src="/sort.png" alt="" width={14} height={14} />
             </button>
+            {role==='admin' &&
             <button className="w-8 h-8 flex items-center justify-center rounded-full bg-lamaYellow">
               <Image src="/plus.png" alt="" width={14} height={14} />
             </button>
+            }
           </div>
         </div>
       </div>
       {/* LIST  */}
-      <Table
-        columns={columns}
-        renderRow={renderRow}
-        data={studentsData.map((student) => ({
-          ...student,
-          grade: String(student.grade),
-        }))}
-        // data={studentsData}
-      />
+      <Table columns={columns} renderRow = {renderRow} data={studentsData} />
       <div className=""></div>
       {/* PAGINATION  */}
       <Pagination />
