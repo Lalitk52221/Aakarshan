@@ -4,7 +4,8 @@ import Image from "next/image";
 import React from "react";
 import Table from "@/components/ui/Table";
 import Link from "next/link";
-import { role, studentsData, subjectsData } from "@/lib/data";
+import { role,subjectsData } from "@/lib/data";
+import FormModals from "@/components/ui/FormModals";
 
 type Subject = {
   id: number;
@@ -45,9 +46,10 @@ const SubjectListPage = () => {
             </button>
           </Link>
           {role === "admin" && (
-            <button className="w-7 h-7 flex items-center justify-center rounded-full bg-gray-300">
-              <Image src="/delete.png" alt="" width={16} height={16} />
-            </button>
+            <>
+            <FormModals type="update" table="subject" id={item.id}/>
+            <FormModals type="create" table="subject" id={item.id}/>
+           </>
           )}
         </div>
       </td>
@@ -68,9 +70,12 @@ const SubjectListPage = () => {
             <button className="w-8 h-8 flex items-center justify-center rounded-full bg-lamaYellow">
               <Image src="/sort.png" alt="" width={14} height={14} />
             </button>
-            <button className="w-8 h-8 flex items-center justify-center rounded-full bg-lamaYellow">
+            {/* <button className="w-8 h-8 flex items-center justify-center rounded-full bg-lamaYellow">
               <Image src="/plus.png" alt="" width={14} height={14} />
-            </button>
+            </button> */}
+           {role==="admin" && (
+            <FormModals type="create" table="subject"/>
+           )}
           </div>
         </div>
       </div>

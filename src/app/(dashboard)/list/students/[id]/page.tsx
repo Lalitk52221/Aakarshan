@@ -1,5 +1,6 @@
 import Announcement from "@/components/ui/admin/Announcement";
 import BigCalendar from "@/components/ui/admin/Big-Calendar";
+import FormModals from "@/components/ui/FormModals";
 import Performance from "@/components/ui/Performance";
 import Image from "next/image";
 import Link from "next/link";
@@ -25,7 +26,28 @@ const singleStudentPage = () => {
               />
             </div>
             <div className="w-2/3 flex flex-col justify-between gap-4">
+              <div className="flex item-center gap-4">
               <h1 className="text-xl font-semibold">Lalit kumar</h1>
+              <FormModals
+                table="student"
+                type="update"
+                data={{
+                  id:"1",
+                  username: "Lalitkumar",
+                  email:"lalitkumar@gmail.com",
+                  password:"password",
+                  firstname: "Lalit",
+                  lastname:"kumar",
+                  phone: "+91 8851245368",
+                  address: "Delhi, India",
+                  bloodtype: "B+",
+                  birthday: "2000-01-01",
+                  gender:"male",
+                  img:"/lalitpic.jpg",
+
+                }}
+              />
+              </div>
               <p className="text-sm text-gray-500">
                 Lorem ipsum dolor sit amet consectetur, adipisicing elit.
               </p>
